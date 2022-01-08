@@ -1,37 +1,9 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
 import React from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
-
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
-const App = () => {
-  return (
-    <View>
-      <Text>Hello world</Text>
-    </View>
-  );
-};
+import {StyleSheet, Text, View} from 'react-native';
+import AppNavContainer from '@navigations';
+export default function App() {
+  return <AppNavContainer />;
+}
 
 const styles = StyleSheet.create({
   sectionContainer: {
@@ -51,5 +23,3 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
 });
-
-export default App;
