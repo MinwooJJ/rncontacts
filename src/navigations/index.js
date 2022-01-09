@@ -1,11 +1,11 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {Text} from 'react-native';
+import DrawerNavigator from './DrawerNavigator';
 
 export default function AppNavContainer() {
   return (
     <NavigationContainer>
-      <Text>Hello world</Text>
+      <DrawerNavigator />
     </NavigationContainer>
   );
 }
