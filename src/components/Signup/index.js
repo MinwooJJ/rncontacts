@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Image, Text, TouchableOpacity, View} from 'react-native';
 import Container from '@components/common/Container';
 import Input from '@components/common/Input';
@@ -7,10 +7,8 @@ import styles from './styles';
 import {LOGIN} from '@constants/routeNames';
 import {useNavigation} from '@react-navigation/native';
 
-export default function Signup() {
+export default function Signup({onSubmit, onChange, form, errors}) {
   const {navigate} = useNavigation();
-  const [name, setName] = useState('');
-  const [password, setPassword] = useState('');
 
   return (
     <Container>
@@ -25,44 +23,54 @@ export default function Signup() {
         <Text style={styles.subTitle}>Create an account</Text>
         <View style={styles.form}>
           <Input
-            label="Username"
-            onChangeText={text => setName(text)}
-            value={name}
+            label="User Name"
             autoCapitalize="none"
-            placeholder="Enter Username"
+            placeholder="Enter User Name"
+            onChangeText={value => {
+              onChange({name: 'userName', value});
+            }}
+            error={errors.userName}
           />
           <Input
             label="First Name"
-            onChangeText={text => setName(text)}
-            value={name}
             autoCapitalize="none"
-            placeholder="Enter Username"
+            placeholder="Enter First Name"
+            onChangeText={value => {
+              onChange({name: 'firstName', value});
+            }}
+            error={errors.firstName}
           />
           <Input
             label="Last Name"
-            onChangeText={text => setName(text)}
-            value={name}
             autoCapitalize="none"
-            placeholder="Enter Username"
+            placeholder="Enter Last Name"
+            onChangeText={value => {
+              onChange({name: 'lastName', value});
+            }}
+            error={errors.lastName}
           />
           <Input
             label="Email"
-            onChangeText={text => setName(text)}
-            value={name}
             autoCapitalize="none"
-            placeholder="Enter Username"
+            placeholder="Enter Email"
+            onChangeText={value => {
+              onChange({name: 'email', value});
+            }}
+            error={errors.email}
           />
           <Input
             label="Password"
-            onChangeText={text => setPassword(text)}
-            value={password}
             secureTextEntry={true}
-            placeholder="Password"
+            placeholder="Enter Password"
             autoCapitalize="none"
             icon={<Text>Show</Text>}
             iconPosition="right"
+            onChangeText={value => {
+              onChange({name: 'password', value});
+            }}
+            error={errors.password}
           />
-          <CustomButton primary title="Submit" />
+          <CustomButton primary title="Submit" onPress={onSubmit} />
           <View style={styles.createSection}>
             <Text style={styles.infoText}>Already have a new account?</Text>
             <TouchableOpacity
