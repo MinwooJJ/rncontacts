@@ -4,10 +4,10 @@ import Container from '@components/common/Container';
 import Input from '@components/common/Input';
 import CustomButton from '@components/common/CustomButton';
 import styles from './styles';
-import {REGISTER} from '@constants/routeNames';
+import {LOGIN} from '@constants/routeNames';
 import {useNavigation} from '@react-navigation/native';
 
-export default function Login() {
+export default function Signup() {
   const {navigate} = useNavigation();
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
@@ -22,10 +22,31 @@ export default function Login() {
       />
       <View>
         <Text style={styles.title}>Welcom to Contacts</Text>
-        <Text style={styles.subTitle}>Please login here</Text>
+        <Text style={styles.subTitle}>Create an account</Text>
         <View style={styles.form}>
           <Input
             label="Username"
+            onChangeText={text => setName(text)}
+            value={name}
+            autoCapitalize="none"
+            placeholder="Enter Username"
+          />
+          <Input
+            label="First Name"
+            onChangeText={text => setName(text)}
+            value={name}
+            autoCapitalize="none"
+            placeholder="Enter Username"
+          />
+          <Input
+            label="Last Name"
+            onChangeText={text => setName(text)}
+            value={name}
+            autoCapitalize="none"
+            placeholder="Enter Username"
+          />
+          <Input
+            label="Email"
             onChangeText={text => setName(text)}
             value={name}
             autoCapitalize="none"
@@ -43,12 +64,12 @@ export default function Login() {
           />
           <CustomButton primary title="Submit" />
           <View style={styles.createSection}>
-            <Text style={styles.infoText}>Need a new account?</Text>
+            <Text style={styles.infoText}>Already have a new account?</Text>
             <TouchableOpacity
               onPress={() => {
-                navigate(REGISTER);
+                navigate(LOGIN);
               }}>
-              <Text style={styles.linkBtn}>Register</Text>
+              <Text style={styles.linkBtn}>Login</Text>
             </TouchableOpacity>
           </View>
         </View>
