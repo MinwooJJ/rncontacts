@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import Signup from '@components/Signup';
+import envs from '@config/env';
 
 export default function SignUp() {
   const [form, setForm] = useState({});
