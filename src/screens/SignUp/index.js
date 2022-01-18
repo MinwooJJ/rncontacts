@@ -1,10 +1,16 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Signup from '@components/Signup';
-import envs from '@config/env';
+import axiosInstance from '@helpers/axiosInstance';
 
 export default function SignUp() {
   const [form, setForm] = useState({});
   const [errors, setErrors] = useState({});
+
+  useEffect(() => {
+    axiosInstance
+      .get('/contacts')
+      .catch(err => console.log('axios error: ', err));
+  }, []);
 
   const onChange = ({name, value}) => {
     setForm({...form, [name]: value});
