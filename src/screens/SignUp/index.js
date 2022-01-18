@@ -1,16 +1,33 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useContext, useEffect, useCallback} from 'react';
+import {useFocusEffect} from '@react-navigation/native';
 import Signup from '@components/Signup';
-import axiosInstance from '@helpers/axiosInstance';
+import register, {clearAuthState} from '@context/actions/auth/register';
+import {GlobalContext} from '@context/Provider';
+import {useNavigation} from '@react-navigation/native';
+import {LOGIN} from '@constants/routeNames';
 
 export default function SignUp() {
   const [form, setForm] = useState({});
   const [errors, setErrors] = useState({});
+  const {navigate} = useNavigation();
+  const {
+    authDispatch,
+    authState: {loading, data, error},
+  } = useContext(GlobalContext);
 
   useEffect(() => {
-    axiosInstance
-      .get('/contacts')
-      .catch(err => console.log('axios error: ', err));
-  }, []);
+    if (data) {
+      navigate(LOGIN);
+    }
+  }, [data]);
+
+  useFocusEffect(
+    useCallback(() => {
+      if (data || error) {
+        clearAuthState()(authDispatch);
+      }
+    }, [data, error]),
+  );
 
   const onChange = ({name, value}) => {
     setForm({...form, [name]: value});
@@ -39,8 +56,6 @@ export default function SignUp() {
   };
 
   const onSubmit = () => {
-    console.log(form);
-
     if (!form.userName) {
       setErrors(prev => {
         return {...prev, userName: 'Please add a User Name'};
@@ -66,6 +81,15 @@ export default function SignUp() {
         return {...prev, password: 'Please add a Password'};
       });
     }
+
+    if (
+      Object.values(form).length === 5 &&
+      Object.values(form).every(item => item.trim().length > 0) &&
+      Object.values(errors).every(item => !item)
+    ) {
+      // Passed validation
+      register(form)(authDispatch);
+    }
   };
 
   return (
@@ -74,6 +98,8 @@ export default function SignUp() {
       onSubmit={onSubmit}
       form={form}
       errors={errors}
+      error={error}
+      loading={loading}
     />
   );
 }
