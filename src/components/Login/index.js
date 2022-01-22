@@ -3,6 +3,7 @@ import {Image, Text, TouchableOpacity, View} from 'react-native';
 import Container from '@components/common/Container';
 import Input from '@components/common/Input';
 import CustomButton from '@components/common/CustomButton';
+import Message from '@components/common/Message';
 import styles from './styles';
 import {REGISTER} from '@constants/routeNames';
 import {useNavigation} from '@react-navigation/native';
@@ -23,6 +24,18 @@ export default function Login() {
       <View>
         <Text style={styles.title}>Welcom to Contacts</Text>
         <Text style={styles.subTitle}>Please login here</Text>
+        <Message
+          retry
+          retryFn={() => {
+            console.log('retry');
+          }}
+          primary
+          onDismiss={() => {}}
+          message="invalid credentials"
+        />
+        <Message onDismiss={() => {}} danger message="invalid credentials" />
+        <Message onDismiss={() => {}} info message="invalid credentials" />
+        <Message onDismiss={() => {}} success message="invalid credentials" />
         <View style={styles.form}>
           <Input
             label="Username"

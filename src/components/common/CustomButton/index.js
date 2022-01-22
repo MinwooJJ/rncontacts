@@ -9,7 +9,7 @@ import {
 import colors from '@assets/theme/colors';
 import styles from './styles';
 
-export default function CostomButton({
+export default function CustomButton({
   title,
   secondary,
   primary,
