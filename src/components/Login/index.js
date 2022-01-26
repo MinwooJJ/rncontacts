@@ -8,10 +8,8 @@ import styles from './styles';
 import {REGISTER} from '@constants/routeNames';
 import {useNavigation} from '@react-navigation/native';
 
-export default function Login() {
+export default function Login({error, onChange, onSubmit, loading}) {
   const {navigate} = useNavigation();
-  const [name, setName] = useState('');
-  const [password, setPassword] = useState('');
 
   return (
     <Container>
@@ -24,37 +22,50 @@ export default function Login() {
       <View>
         <Text style={styles.title}>Welcom to Contacts</Text>
         <Text style={styles.subTitle}>Please login here</Text>
-        <Message
-          retry
-          retryFn={() => {
-            console.log('retry');
-          }}
-          primary
-          onDismiss={() => {}}
-          message="invalid credentials"
-        />
-        <Message onDismiss={() => {}} danger message="invalid credentials" />
-        <Message onDismiss={() => {}} info message="invalid credentials" />
-        <Message onDismiss={() => {}} success message="invalid credentials" />
+
         <View style={styles.form}>
+          {error && !error?.error && (
+            <Message
+              danger
+              onDismiss={() => {}}
+              message="Invalid Credentials"
+            />
+          )}
+          {error?.error && (
+            <Message
+              retry
+              retryFn={onSubmit}
+              danger
+              onDismiss
+              message={error?.error}
+            />
+          )}
           <Input
             label="Username"
-            onChangeText={text => setName(text)}
-            value={name}
             autoCapitalize="none"
             placeholder="Enter Username"
+            onChangeText={value => {
+              onChange({name: 'userName', value});
+            }}
           />
           <Input
             label="Password"
-            onChangeText={text => setPassword(text)}
-            value={password}
             secureTextEntry={true}
-            placeholder="Password"
+            placeholder="Enter Password"
             autoCapitalize="none"
             icon={<Text>Show</Text>}
             iconPosition="right"
+            onChangeText={value => {
+              onChange({name: 'password', value});
+            }}
           />
-          <CustomButton primary title="Submit" />
+          <CustomButton
+            disabled={loading}
+            onPress={onSubmit}
+            loading={loading}
+            primary
+            title="Submit"
+          />
           <View style={styles.createSection}>
             <Text style={styles.infoText}>Need a new account?</Text>
             <TouchableOpacity

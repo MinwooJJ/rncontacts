@@ -6,6 +6,7 @@ import CustomButton from '@components/common/CustomButton';
 import styles from './styles';
 import {LOGIN} from '@constants/routeNames';
 import {useNavigation} from '@react-navigation/native';
+import Message from '@components/common/Message';
 import colors from '@assets/theme/colors';
 
 export default function Signup({onSubmit, onChange, errors, error, loading}) {
@@ -24,7 +25,15 @@ export default function Signup({onSubmit, onChange, errors, error, loading}) {
         <Text style={styles.subTitle}>Create an account</Text>
         <View style={styles.form}>
           {error?.error && (
-            <Text style={{color: colors.danger}}>{error.error}</Text>
+            <Message
+              retry
+              retryFn={() => {
+                console.log('retry');
+              }}
+              danger
+              onDismiss={() => {}}
+              message={error?.error}
+            />
           )}
           <Input
             label="User Name"
