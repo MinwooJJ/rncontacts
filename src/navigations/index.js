@@ -10,7 +10,9 @@ export default function AppNavContainer() {
   const {
     authState: {isLoggedIn},
   } = useContext(GlobalContext);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  // AsyncStorage control value
+  // isLoggedIn을 초기 값으로 주어 global state값도 control
+  const [isAuthenticated, setIsAuthenticated] = useState(isLoggedIn);
   const [authLoaded, setAuthLoaded] = useState(false);
 
   const getUser = async () => {
@@ -29,19 +31,16 @@ export default function AppNavContainer() {
     }
   };
 
+  // isAuthenticated 값을 변경하기 위한 isLoggedin dependency
   useEffect(() => {
     getUser();
-  }, []);
+  }, [isLoggedIn]);
 
   return (
     <>
       {authLoaded ? (
         <NavigationContainer>
-          {isLoggedIn || isAuthenticated ? (
-            <DrawerNavigator />
-          ) : (
-            <AuthNavigator />
-          )}
+          {isAuthenticated ? <DrawerNavigator /> : <AuthNavigator />}
         </NavigationContainer>
       ) : (
         <ActivityIndicator />

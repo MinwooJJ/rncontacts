@@ -1,5 +1,6 @@
 import React from 'react';
 import Container from '@components/common/Container';
+import logoutUser from '@context/actions/auth/logoutUser';
 import {
   SafeAreaView,
   Image,
@@ -10,12 +11,17 @@ import {
 } from 'react-native';
 import styles from './styles';
 import {SETTINGS} from '@constants/routeNames';
-export default function SideMenu({navigation}) {
+export default function SideMenu({navigation, authDispatch}) {
   const handleLogout = () => {
     navigation.toggleDrawer();
     Alert.alert('Logout!', 'Are you sure you want to logout?', [
       {text: 'Cancel', onPress: () => {}},
-      {text: 'OK', onPress: () => {}},
+      {
+        text: 'OK',
+        onPress: () => {
+          logoutUser()(authDispatch);
+        },
+      },
     ]);
   };
 
