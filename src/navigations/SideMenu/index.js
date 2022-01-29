@@ -1,9 +1,24 @@
 import React from 'react';
 import Container from '@components/common/Container';
-import {SafeAreaView, Image, TouchableOpacity, Text, View} from 'react-native';
+import {
+  SafeAreaView,
+  Image,
+  TouchableOpacity,
+  Text,
+  View,
+  Alert,
+} from 'react-native';
 import styles from './styles';
 import {SETTINGS} from '@constants/routeNames';
 export default function SideMenu({navigation}) {
+  const handleLogout = () => {
+    navigation.toggleDrawer();
+    Alert.alert('Logout!', 'Are you sure you want to logout?', [
+      {text: 'Cancel', onPress: () => {}},
+      {text: 'OK', onPress: () => {}},
+    ]);
+  };
+
   const menuItems = [
     {
       icon: <Text>T</Text>,
@@ -12,7 +27,7 @@ export default function SideMenu({navigation}) {
         navigation.navigate(SETTINGS);
       },
     },
-    {icon: <Text>T</Text>, name: 'Logout', onPress: () => {}},
+    {icon: <Text>T</Text>, name: 'Logout', onPress: handleLogout},
   ];
 
   return (
