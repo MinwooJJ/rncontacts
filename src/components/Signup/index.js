@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Image, Text, TouchableOpacity, View} from 'react-native';
 import Container from '@components/common/Container';
 import Input from '@components/common/Input';
@@ -7,10 +7,10 @@ import styles from './styles';
 import {LOGIN} from '@constants/routeNames';
 import {useNavigation} from '@react-navigation/native';
 import Message from '@components/common/Message';
-import colors from '@assets/theme/colors';
 
 export default function Signup({onSubmit, onChange, errors, error, loading}) {
   const {navigate} = useNavigation();
+  const [isSecureEntry, setIsSecureEntry] = useState(true);
 
   return (
     <Container>
@@ -73,10 +73,17 @@ export default function Signup({onSubmit, onChange, errors, error, loading}) {
           />
           <Input
             label="Password"
-            secureTextEntry={true}
+            secureTextEntry={isSecureEntry}
+            icon={
+              <TouchableOpacity
+                onPress={() => {
+                  setIsSecureEntry(prev => !prev);
+                }}>
+                <Text>{isSecureEntry ? 'Show' : 'Hide'}</Text>
+              </TouchableOpacity>
+            }
             placeholder="Enter Password"
             autoCapitalize="none"
-            icon={<Text>Show</Text>}
             iconPosition="right"
             onChangeText={value => {
               onChange({name: 'password', value});

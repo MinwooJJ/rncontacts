@@ -10,6 +10,7 @@ import {useNavigation} from '@react-navigation/native';
 
 export default function Login({error, onChange, onSubmit, loading}) {
   const {navigate} = useNavigation();
+  const [isSecureEntry, setIsSecureEntry] = useState(true);
 
   return (
     <Container>
@@ -50,10 +51,17 @@ export default function Login({error, onChange, onSubmit, loading}) {
           />
           <Input
             label="Password"
-            secureTextEntry={true}
             placeholder="Enter Password"
             autoCapitalize="none"
-            icon={<Text>Show</Text>}
+            secureTextEntry={isSecureEntry}
+            icon={
+              <TouchableOpacity
+                onPress={() => {
+                  setIsSecureEntry(prev => !prev);
+                }}>
+                <Text>{isSecureEntry ? 'Show' : 'Hide'}</Text>
+              </TouchableOpacity>
+            }
             iconPosition="right"
             onChangeText={value => {
               onChange({name: 'password', value});
