@@ -15,12 +15,6 @@ export default function SignUp() {
     authState: {loading, data, error},
   } = useContext(GlobalContext);
 
-  useEffect(() => {
-    if (data) {
-      navigate(LOGIN);
-    }
-  }, [data]);
-
   useFocusEffect(
     useCallback(() => {
       return () => {
@@ -90,7 +84,9 @@ export default function SignUp() {
       Object.values(errors).every(item => !item)
     ) {
       // Passed validation
-      register(form)(authDispatch);
+      register(form)(authDispatch)(userData => {
+        navigate(LOGIN, {data: userData});
+      });
     }
   };
 

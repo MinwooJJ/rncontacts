@@ -8,7 +8,14 @@ import styles from './styles';
 import {REGISTER} from '@constants/routeNames';
 import {useNavigation} from '@react-navigation/native';
 
-export default function Login({error, onChange, onSubmit, loading}) {
+export default function Login({
+  form,
+  error,
+  onChange,
+  onSubmit,
+  loading,
+  justSignup,
+}) {
   const {navigate} = useNavigation();
   const [isSecureEntry, setIsSecureEntry] = useState(true);
 
@@ -25,6 +32,13 @@ export default function Login({error, onChange, onSubmit, loading}) {
         <Text style={styles.subTitle}>Please login here</Text>
 
         <View style={styles.form}>
+          {justSignup && (
+            <Message
+              success
+              onDismiss={() => {}}
+              message="Account created successfully"
+            />
+          )}
           {error && !error?.error && (
             <Message
               danger
@@ -41,10 +55,12 @@ export default function Login({error, onChange, onSubmit, loading}) {
               message={error?.error}
             />
           )}
+          {/* Input의 초기 값을 정해주고 싶은 경우 value 사용 */}
           <Input
             label="Username"
             autoCapitalize="none"
             placeholder="Enter Username"
+            value={form.userName || null}
             onChangeText={value => {
               onChange({name: 'userName', value});
             }}

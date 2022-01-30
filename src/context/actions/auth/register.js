@@ -19,7 +19,8 @@ export default ({
     firstName: first_name,
     lastName: last_name,
   }) =>
-  dispatch => {
+  dispatch =>
+  onSuccess => {
     dispatch({
       type: REGISTER_LOADING,
     });
@@ -37,6 +38,9 @@ export default ({
           type: REGISTER_SUCCESS,
           payload: res.data,
         });
+
+        // 로그인 성공 후 callback을 실행시켜 login 스크린으로 보내줌
+        onSuccess(res.data);
       })
       .catch(err => {
         dispatch({
