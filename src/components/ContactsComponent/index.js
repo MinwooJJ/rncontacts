@@ -29,7 +29,8 @@ export default function ContactsComponent({
   };
 
   const renderItem = ({item}) => {
-    const {contact_picture, first_name, last_name, phone_number} = item;
+    const {contact_picture, first_name, last_name, phone_number, country_code} =
+      item;
 
     return (
       <TouchableOpacity style={styles.itemContainer}>
@@ -45,22 +46,37 @@ export default function ContactsComponent({
                 width: 45,
                 height: 45,
                 backgroundColor: colors.grey,
-              }}
-            />
+                flexDirection: 'row',
+                justifyContent: 'center',
+                alignItems: 'center',
+                borderRadius: 100,
+              }}>
+              <Text style={[styles.name, {color: colors.white}]}>
+                {first_name[0]}
+              </Text>
+              <Text style={[styles.name, {color: colors.white}]}>
+                {last_name[0]}
+              </Text>
+            </View>
           )}
-          <View style={{flexDirection: 'row'}}>
-            <Text>{first_name}</Text>
-            <Text>{last_name}</Text>
+          <View style={{paddingLeft: 20}}>
+            <View style={{flexDirection: 'row'}}>
+              <Text style={styles.name}>{first_name}</Text>
+              <Text style={styles.name}>{last_name}</Text>
+            </View>
+            <Text
+              style={
+                styles.phoneNumber
+              }>{`${country_code} ${phone_number}`}</Text>
           </View>
-          <Text>{phone_number}</Text>
         </View>
-        <Icon name="right" type="antDesign" />
+        <Icon name="right" type="antDesign" size={18} color={colors.grey} />
       </TouchableOpacity>
     );
   };
 
   return (
-    <View>
+    <View style={{backgroundColor: colors.white}}>
       <AppModal
         title="My Profile"
         modalBody={<View></View>}
@@ -80,6 +96,9 @@ export default function ContactsComponent({
           <FlatList
             renderItem={renderItem}
             data={data}
+            ItemSeparatorComponent={() => (
+              <View style={{height: 0.5, backgroundColor: colors.grey}} />
+            )}
             ListEmptyComponent={ListEmptyComponent}
             ListFooterComponent={<View style={{height: 150}} />}
             keyExtractor={item => String(item.id)}
