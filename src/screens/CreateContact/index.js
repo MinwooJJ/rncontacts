@@ -26,6 +26,10 @@ export default function CreateContact() {
     });
   };
 
+  const toggleValueChange = () => {
+    setForm({...form, isFavoriate: !form.isFavoriate});
+  };
+
   return (
     <CreateContactComponent
       onSubmit={onSubmit}
@@ -34,6 +38,7 @@ export default function CreateContact() {
       setForm={setForm}
       loading={loading}
       error={error}
+      toggleValueChange={toggleValueChange}
     />
   );
 }
