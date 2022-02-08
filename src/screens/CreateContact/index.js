@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useRef} from 'react';
 import CreateContactComponent from '@components/CreateContactComponent';
 import {GlobalContext} from '@context/Provider';
 import createContact from '@context/actions/contacts/createContact';
@@ -14,6 +14,7 @@ export default function CreateContact() {
       createContact: {loading, error},
     },
   } = useContext(GlobalContext);
+  const sheetRef = useRef(null);
   const [form, setForm] = useState({});
 
   const onChangeText = ({name, value}) => {
@@ -24,6 +25,18 @@ export default function CreateContact() {
     createContact(form)(contactsDispatch)(() => {
       navigate(CONTACT_LIST);
     });
+  };
+
+  const closeSheet = () => {
+    if (sheetRef.current) {
+      sheetRef.current.close();
+    }
+  };
+
+  const openSheet = () => {
+    if (sheetRef.current) {
+      sheetRef.current.open();
+    }
   };
 
   const toggleValueChange = () => {
@@ -39,6 +52,9 @@ export default function CreateContact() {
       loading={loading}
       error={error}
       toggleValueChange={toggleValueChange}
+      sheetRef={sheetRef}
+      openSheet={openSheet}
+      closeSheet={closeSheet}
     />
   );
 }
