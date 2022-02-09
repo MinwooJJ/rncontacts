@@ -19,7 +19,8 @@ export default function CreateContactComponent({
   error,
   sheetRef,
   openSheet,
-  closeSheet,
+  onFileSelected,
+  localFile,
 }) {
   return (
     <View style={styles.container}>
@@ -27,7 +28,7 @@ export default function CreateContactComponent({
         <Image
           width={150}
           height={150}
-          source={{uri: DEFAULT_IMAGE_URI}}
+          source={{uri: localFile?.path || DEFAULT_IMAGE_URI}}
           style={styles.imageView}
         />
         <TouchableOpacity onPress={openSheet}>
@@ -99,7 +100,7 @@ export default function CreateContactComponent({
           title="Submit"
         />
       </Container>
-      <ImagePicker ref={sheetRef} />
+      <ImagePicker onFileSelected={onFileSelected} ref={sheetRef} />
     </View>
   );
 }

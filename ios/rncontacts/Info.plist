@@ -35,7 +35,15 @@
 			</dict>
 		</dict>
 	</dict>
-	<key>NSLocationWhenInUseUsageDescription</key>
+
+  <!-- 카메라와 갤러리에 접근하기 위한 설정 -->
+  <key>NSCameraUsageDescription</key>
+  <string>RNContacts requires access to your phone's camera.</string>
+  
+  <key>NSMicrophoneUsageDescription</key>
+  <string>RNContacts requires access to your phone's gallery.</string>
+	
+  <key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
