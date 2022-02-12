@@ -1,7 +1,7 @@
 import axios from 'axios';
 import envs from '@config/env';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {navigate} from '@navigations/SideMenu/RooteNavigator';
+import {navigate} from '@navigations/SideMenu/RootNavigator';
 import {CREATE_CONTACT} from '../constants/routeNames';
 
 let headers = {};

@@ -5,7 +5,7 @@ import AuthNavigator from './AuthNavigator';
 import {GlobalContext} from '@context/Provider';
 import {NavigationContainer} from '@react-navigation/native';
 import {ActivityIndicator} from 'react-native';
-import {navigationRef} from './SideMenu/RooteNavigator';
+import {navigationRef} from './SideMenu/RootNavigator';
 export default function AppNavContainer() {
   const {
     authState: {isLoggedIn},
