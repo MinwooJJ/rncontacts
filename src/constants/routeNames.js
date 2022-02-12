@@ -6,6 +6,7 @@ export const SETTINGS = 'Settings';
 
 // Auth Navigator
 export const LOGIN = 'LogIn';
+export const LOGOUT = 'LogOut';
 export const REGISTER = 'Register';
 
 // Drawe Navigator
