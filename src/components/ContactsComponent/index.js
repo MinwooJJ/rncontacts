@@ -7,7 +7,6 @@ import {
   ActivityIndicator,
   Image,
 } from 'react-native';
-import AppModal from '@components/common/Appmodal';
 import CustomButton from '@components/common/CustomButton';
 import Message from '@components/common/Message';
 import colors from '@assets/theme/colors';
@@ -17,10 +16,10 @@ import {useNavigation} from '@react-navigation/native';
 import {CREATE_CONTACT} from '../../constants/routeNames';
 
 export default function ContactsComponent({
-  modalVisible,
   setModalVisible,
   data,
   loading,
+  sortBy,
 }) {
   const {navigate} = useNavigation();
 
@@ -82,14 +81,6 @@ export default function ContactsComponent({
   return (
     <>
       <View style={{backgroundColor: colors.white}}>
-        <AppModal
-          title="My Profile"
-          modalBody={<View></View>}
-          modalFooter={<></>}
-          modalVisible={modalVisible}
-          setModalVisible={setModalVisible}
-        />
-
         {loading && (
           <View style={{paddingVertical: 100, paddingHorizontal: 100}}>
             <ActivityIndicator size="large" color={colors.primary} />
@@ -100,7 +91,27 @@ export default function ContactsComponent({
           <View style={{paddingVertical: 20}}>
             <FlatList
               renderItem={renderItem}
-              data={data}
+              data={
+                sortBy
+                  ? data.sort((a, b) => {
+                      if (sortBy === 'First Name') {
+                        if (b.first_name > a.first_name) {
+                          return -1;
+                        } else {
+                          return 1;
+                        }
+                      }
+
+                      if (sortBy === 'Last Name') {
+                        if (b.last_name > a.last_name) {
+                          return -1;
+                        } else {
+                          return 1;
+                        }
+                      }
+                    })
+                  : data
+              }
               ItemSeparatorComponent={() => (
                 <View style={{height: 0.5, backgroundColor: colors.grey}} />
               )}
