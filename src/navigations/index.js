@@ -5,7 +5,7 @@ import AuthNavigator from './AuthNavigator';
 import {GlobalContext} from '@context/Provider';
 import {NavigationContainer} from '@react-navigation/native';
 import {ActivityIndicator} from 'react-native';
-
+import {navigationRef} from './SideMenu/RooteNavigator';
 export default function AppNavContainer() {
   const {
     authState: {isLoggedIn},
@@ -39,7 +39,7 @@ export default function AppNavContainer() {
   return (
     <>
       {authLoaded ? (
-        <NavigationContainer>
+        <NavigationContainer ref={navigationRef}>
           {isAuthenticated ? <DrawerNavigator /> : <AuthNavigator />}
         </NavigationContainer>
       ) : (

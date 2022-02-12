@@ -1,6 +1,8 @@
 import axios from 'axios';
 import envs from '@config/env';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {navigate} from '@navigations/SideMenu/RooteNavigator';
+import {CREATE_CONTACT} from '../constants/routeNames';
 
 let headers = {};
 
@@ -11,6 +13,7 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   async config => {
+    navigate(CREATE_CONTACT);
     // request 전에 token 값을 설정해주는 interceptor
     const token = await AsyncStorage.getItem('token');
     if (token) {
