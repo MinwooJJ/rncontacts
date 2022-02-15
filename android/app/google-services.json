@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "730790245723",
+    "project_id": "rncontacts-79f81",
+    "storage_bucket": "rncontacts-79f81.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:730790245723:android:a14e6374b6501b9b75567e",
+        "android_client_info": {
+          "package_name": "com.crycetruly.rncontacts"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "730790245723-o2rjcq5phqlkit8u41j912mk2bvo555c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBAB4SdbW3a2MRpUxvxpg3M75a4K0O0Bik"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "730790245723-o2rjcq5phqlkit8u41j912mk2bvo555c.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "730790245723-lgqjd8rmo3ce3qr45mjhoeskjq9tbvgc.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.rncontacts"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
