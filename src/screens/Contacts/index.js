@@ -1,4 +1,10 @@
-import React, {useContext, useEffect, useState, useCallback} from 'react';
+import React, {
+  useContext,
+  useEffect,
+  useState,
+  useCallback,
+  useRef,
+} from 'react';
 import {TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import Icon from '@components/common/Icon';
@@ -7,12 +13,15 @@ import {GlobalContext} from '@context/Provider';
 import getContacts from '@context/actions/contacts/getContacts';
 import {useFocusEffect} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {CONTACT_DETAIL} from '../../constants/routeNames';
 
 export default function Contacts() {
   // Navigation 컴포넌트가 아닌 직접 사용하는 스크린 컴포넌트에서 설정 가능
-  const {setOptions, toggleDrawer} = useNavigation();
+  const {setOptions, toggleDrawer, navigate} = useNavigation();
   const [modalVisible, setModalVisible] = useState(false);
   const [sortBy, setSortBy] = useState('');
+
+  const contactsRef = useRef([]);
 
   const {
     contactsDispatch,
@@ -40,6 +49,21 @@ export default function Contacts() {
       return () => {};
     }, []),
   );
+
+  useEffect(() => {
+    const prev = contactsRef.current;
+
+    contactsRef.current = data;
+    const newList = contactsRef.current;
+
+    if (newList.length - prev.length === 1) {
+      const newContact = newList.find(
+        item => !prev.map(i => i.id).includes(item.id),
+      );
+
+      navigate(CONTACT_DETAIL, {item: newContact});
+    }
+  }, [data.length]);
 
   useEffect(() => {
     setOptions({
