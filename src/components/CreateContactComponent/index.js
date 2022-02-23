@@ -28,7 +28,7 @@ export default function CreateContactComponent({
         <Image
           width={150}
           height={150}
-          source={{uri: localFile?.path || DEFAULT_IMAGE_URI}}
+          source={{uri: localFile?.path || localFile || DEFAULT_IMAGE_URI}}
           style={styles.imageView}
         />
         <TouchableOpacity onPress={openSheet}>
@@ -39,6 +39,7 @@ export default function CreateContactComponent({
             onChangeText({name: 'firstName', value: value});
           }}
           label="First Name"
+          value={form.firstName || ''}
           placeholder="Enter First Name"
           error={error?.first_name?.[0]}
         />
@@ -47,6 +48,7 @@ export default function CreateContactComponent({
             onChangeText({name: 'lastName', value: value});
           }}
           label="Last Name"
+          value={form.lastName || ''}
           placeholder="Enter Last Name"
           error={error?.last_name?.[0]}
         />
@@ -70,6 +72,7 @@ export default function CreateContactComponent({
           style={{paddingLeft: 10}}
           iconPosition="left"
           label="Phone Number"
+          value={form.phoneNumber || ''}
           placeholder="Enter Phone Number"
           error={error?.phone_number?.[0]}
           onChangeText={value => {
