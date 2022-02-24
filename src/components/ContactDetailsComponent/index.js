@@ -21,8 +21,7 @@ const ContactDetailsComponent = ({
 }) => {
   const {navigate} = useNavigation();
 
-  const {contact_picture, first_name, country_code, phone_number, last_name} =
-    contact;
+  const {contact_picture, first_name, phone_number, last_name} = contact;
 
   return (
     <ScrollView style={styles.scrollView}>
@@ -51,6 +50,7 @@ const ContactDetailsComponent = ({
             </TouchableOpacity>
           </View>
         )}
+
         <View style={styles.content}>
           <Text style={styles.names}>{first_name + ' ' + last_name}</Text>
         </View>

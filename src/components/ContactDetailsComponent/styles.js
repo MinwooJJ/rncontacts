@@ -52,4 +52,3 @@ export default StyleSheet.create({
     alignSelf: 'center',
   },
 });
-© 2022 GitHub, Inc.

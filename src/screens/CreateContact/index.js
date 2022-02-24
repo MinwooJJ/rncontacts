@@ -123,13 +123,13 @@ export default function CreateContact() {
     }
   };
 
-  const toggleValueChange = () => {
-    setForm({...form, isFavoriate: !form.isFavoriate});
-  };
-
   const onFileSelected = images => {
     setLocalFile(images);
     closeSheet();
+  };
+
+  const toggleValueChange = () => {
+    setForm({...form, isFavoriate: !form.isFavoriate});
   };
 
   return (
